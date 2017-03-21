@@ -3,9 +3,11 @@
  */
 public class StockExchange {
   
+   Map<Stock, String> map;
+  
   public StockExchange(){
     
-    Map<Stock, String> map = new HashMap<Stock, String>();
+   map = new HashMap<String, Stock>();
     
   }
   
@@ -14,19 +16,20 @@ public class StockExchange {
   
   public String getQuote(String symbol){
     
+    String ret = "";
     //finds the Stock with the symbol and produces a quote for it
     //Format: Name(Symbol) Price: (price)  hi: (price)  lo: (price)  vol: 0
     
     if(map.containsKey(symbol) == true){
-     
-      for(String symbol2 : map.keySet()){
-       
-        
-        
+        Stock stockRet = map.get(symbol);  //??
+          
+        ret = stockRet.getQuote();
       }
       
     }
     
+       return ret;
+       
   }
   
   
@@ -35,8 +38,8 @@ public class StockExchange {
   public void listStock(String symbol, String name, double price){
     
     //create a HashMap and put newStock on it
-   
-    Map<Stock, String> map = new HashMap<Stock, String>();
+    
+    Stock newStock = Stock(symbol, name, price);
     
     map.put(newStock, symbol);    
     
