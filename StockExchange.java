@@ -50,7 +50,12 @@ public class StockExchange {
   
   public void placeOrder(TradeOrder order){
     
-    stock.placeOrder(order);
+    stockSymbol = order.getSymbol();
+    
+    map.get(stockSymbol).placeOrder(order);
+    
+    //check if it's a buy or sell order?
+    
     
   }
   
