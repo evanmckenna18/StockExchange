@@ -14,7 +14,7 @@ public class Stock {
   
   
   
-  public listStock(String symbol, String name, double Price){
+  public listStock(String symbol, String name, double price){
     this.symbol = symbol;
     this.name = name;
     this.price = price;
