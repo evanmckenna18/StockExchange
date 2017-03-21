@@ -5,12 +5,13 @@ import java.text.DecimalFormat;
 import java.util.PriorityQueue;
 
 public class Stock {
-  public static java.text.DecimalFormat money;
+  public static java.text.DecimalFormat money = new DecimalFormat("$0,000,000,000.00");
   private String symbol,name;
   private double price, high, low, last;
   private volume;
   PriorityQueue buy;
   PriorityQueue sell;
+  
   
   
   public listStock(String symbol, String name, double Price){
@@ -28,7 +29,8 @@ public class Stock {
   }
   
   public String getQuote(){
-    String str = name + " (" + symbol + ")\n" + "Price: " + money.format(last) + " High: " + high + " Low: " + low;
+    String str = name + " (" + symbol + ")\n" + "Price: " + money.format(last) + " High: " + high + " Low: " + low + " Ask: " + sell.peek() + " Size: "
+      + sell.size() + " Bid: " + buy.peek() + " Size: " + buy.size();
     
   }
   
@@ -39,10 +41,8 @@ public class Stock {
     } else {
       str = str + "Buy ";
     }
-    str = str + this.stockSymbol + " ";
-   
-    str = str + " (" + this.companyName + ")\n";
-
+    str = str + this.stockSymbol +  "(" + this.companyName + ")\n";
+    
     str = str + order.getShares() + " shares";
     if (order.isMarket()) {
       str = str + " at market ";
