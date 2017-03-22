@@ -4,8 +4,11 @@
 public class Brokerage implements Login {
   
   Map<String, String> map = new TreeMap<String, String>();
+  StockExchange ex;
   
   public Brokerage(StockExchange exchange){
+    
+    ex = exchange;
     
   }
   
@@ -13,9 +16,7 @@ public class Brokerage implements Login {
   //===============================================================================================================================
   
   public int addUser(String name, String password){
-    
-    map.put(name, password);
-    
+        
     if(map.containsKey(name) == true){
       
       return -3;
@@ -40,6 +41,8 @@ public class Brokerage implements Login {
   //===============================================================================================================================
   
   public void getQuote(String symbol, Trader trader){
+     
+    trader.recieveMessage(ex.getQuote(symbol));
  
     
   }
@@ -78,7 +81,8 @@ public class Brokerage implements Login {
   //===============================================================================================================================
   
   public void placeOrder(TradeOrder order){
-    
+       
+    ex.placeOrder(order);
     
   }
  
