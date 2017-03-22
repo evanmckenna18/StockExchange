@@ -50,7 +50,7 @@ public class StockExchange {
   
   public void placeOrder(TradeOrder order){
     
-    stockSymbol = order.getSymbol();
+   String stockSymbol = order.getSymbol();
     
     map.get(stockSymbol).placeOrder(order);
     
