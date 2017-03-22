@@ -9,8 +9,8 @@ public class Stock {
   private String symbol,name;
   private double price, high, low, last;
   private volume;
-  PriorityQueue buy;
-  PriorityQueue sell;
+  PriorityQueue<TradeOrder> buy;
+  PriorityQueue<TradeOrder> sell;
   
   
   
@@ -22,8 +22,8 @@ public class Stock {
     low = price;
     last = price;
     volume = 0;
-    buy = new PriorityQueue(100, new PriceComparator(false));
-    sell = new PriorityQueue(100, new PriceComparator());
+    buy = new PriorityQueue(new PriceComparator(false));
+    sell = new PriorityQueue(new PriceComparator());
     
     
   }
@@ -61,39 +61,39 @@ public class Stock {
   private void executeOrders(){
     while (!(this.buyOrders.isEmpty()) || (!this.sellOrders.isEmpty()))
     {
-      TradeOrder sell = (TradeOrder)sellOrders.peek();
-      TradeOrder buy = (TradeOrder)buyOrders.peek();
-      if ((sell.isLimit()) && (buy.isLimit()) && (sell.getPrice() > buy.getPrice())) {
+      TradeOrder s = (TradeOrder)sellOrders.peek();
+      TradeOrder b = (TradeOrder)buyOrders.peek();
+      if ((s.isLimit()) && (b.isLimit()) && (s.getPrice() > b.getPrice())) {
         break;
       }
       double price;
-      if ((sell.isMarket()) && (buy.isMarket()))
+      if ((s.isMarket()) && (b.isMarket()))
       {
         price = this.lastPrice;
       }
-        else if ((sell.isMarket()) && (buy.isLimit()))
+        else if ((s.isMarket()) && (b.isLimit()))
         {
-          price = buy.getPrice();
+          price = b.getPrice();
         }
         else
         {
-          price = sell.getPrice();
+          price = s.getPrice();
           }
         }
       }
-   int shares = Math.min(buy.getShares(), sell.getShares());
+   int shares = Math.min(b.getShares(), s.getShares());
       
-      sell.subtractShares(shares);
-      buy.subtractShares(shares);
+      s.subtractShares(shares);
+      b.subtractShares(shares);
       
-      String str = shares + " " + this.stockSymbol + " at " + money.format(price) + " amt " + money.format(price * shares);
+      String str = shares + " of " + this.stockSymbol + " at " + money.format(price) + " for " + money.format(price * shares) + " in total";
       
-      buy.getTrader().receiveMessage("You bought: " + str);
-      sell.getTrader().receiveMessage("You sold: " + str);
-      if (buy.getShares() == 0) {
+      b.getTrader().receiveMessage("You bought: " + str);
+      s.getTrader().receiveMessage("You sold: " + str);
+      if (b.getShares() == 0) {
         this.buyOrders.remove();
       }
-      if (sell.getShares() == 0) {
+      if (s.getShares() == 0) {
         this.sellOrders.remove();
       }
       this.volume += shares;
