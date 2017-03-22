@@ -60,7 +60,7 @@ public class Stock {
   
     
   private void executeOrders(){
-    while (!(this.buyOrders.isEmpty()) || (!this.sellOrders.isEmpty()))
+    while (!(this.buy.isEmpty()) || (!this.sell.isEmpty()))
     {
       TradeOrder s = (TradeOrder)sellOrders.peek();
       TradeOrder b = (TradeOrder)buyOrders.peek();
@@ -70,7 +70,7 @@ public class Stock {
       double price;
       if ((s.isMarket()) && (b.isMarket()))
       {
-        price = this.lastPrice;
+        price = this.last;
       }
         else if ((s.isMarket()) && (b.isLimit()))
         {
@@ -80,14 +80,14 @@ public class Stock {
         {
           price = s.getPrice();
           }
-        }
-      }
+        
+      
    int shares = Math.min(b.getShares(), s.getShares());
       
       s.subtractShares(shares);
       b.subtractShares(shares);
       
-      String str = shares + " shares of " + this.stockSymbol + " at " + money.format(price) + " for " + money.format(price * shares) + " in total";
+      String str = shares + " shares of " + this.symbol + " at " + money.format(price) + " for " + money.format(price * shares) + " in total";
       
       b.getTrader().receiveMessage("You bought: " + str);
       s.getTrader().receiveMessage("You sold: " + str);
