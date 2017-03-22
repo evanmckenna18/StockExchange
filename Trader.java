@@ -73,7 +73,7 @@ public class Trader implements Comparable<Trader>{
                               
     if (window != null) {
       while (!mailbox.isEmpty()) {
-        window.showMessage(mailbox.remove())
+        window.showMessage(mailbox.remove());
       }
     }
   }
