@@ -55,8 +55,9 @@ public class Stock {
     } else {
       this.buy.add(order);
     }
+    executeOrders();
   }
-  executeOrders();
+  
     
   private void executeOrders(){
     while (!(this.buyOrders.isEmpty()) || (!this.sellOrders.isEmpty()))
@@ -91,19 +92,19 @@ public class Stock {
       b.getTrader().receiveMessage("You bought: " + str);
       s.getTrader().receiveMessage("You sold: " + str);
       if (b.getShares() == 0) {
-        this.buyOrders.remove();
+        this.buy.remove();
       }
       if (s.getShares() == 0) {
-        this.sellOrders.remove();
+        this.sell.remove();
       }
       this.volume += shares;
-      if (price < this.loPrice) {
-        this.loPrice = price;
+      if (price < this.low) {
+        this.low = price;
       }
-      if (price > this.hiPrice) {
-        this.hiPrice = price;
+      if (price > this.high) {
+        this.high = price;
       }
-      this.lastPrice = price;
+      this.last = price;
     }
   
   }
