@@ -39,7 +39,7 @@ public class TradeOrder {
   }
   public void subtractShares(int shares){
     if(shares > getShares()){
-     throw new IllegalArgumentExecption();
+     throw new IllegalArgumentException("You don't have that many shares");
     }
     else{
       numShares = getShares() - shares;
