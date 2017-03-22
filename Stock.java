@@ -9,12 +9,12 @@ public class Stock {
   private String symbol,name;
   private double price, high, low, last;
   private volume;
-  PriorityQueue<TradeOrder> buy;
-  PriorityQueue<TradeOrder> sell;
+  private PriorityQueue<TradeOrder> buy;
+  private PriorityQueue<TradeOrder> sell;
   
   
   
-  public listStock(String symbol, String name, double price){
+  public Stock(String symbol, String name, double price){
     this.symbol = symbol;
     this.name = name;
     this.price = price;
