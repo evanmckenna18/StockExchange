@@ -22,8 +22,8 @@ public class Stock {
     low = price;
     last = price;
     volume = 0;
-    buy = new PriorityQueue(new PriceComparator(false));
-    sell = new PriorityQueue(new PriceComparator());
+    buy = new PriorityQueue(1000,new PriceComparator(false));
+    sell = new PriorityQueue(1000,new PriceComparator());
     
     
   }
@@ -51,9 +51,9 @@ public class Stock {
     }
     order.getTrader().receiveMessage(str);
     if (order.isSell()) {
-      this.sellOrders.add(order);
+      this.sell.add(order);
     } else {
-      this.buyOrders.add(order);
+      this.buy.add(order);
     }
   }
   executeOrders();
