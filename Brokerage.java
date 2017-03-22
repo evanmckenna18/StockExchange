@@ -47,6 +47,31 @@ public class Brokerage implements Login {
   
   public int login(Trader trader){
     
+    if(map.containsKey(trader.getName()) == true){
+      
+      return -3;
+      
+    }
+      
+      if(map.containsKey(trader.getName()) == false){
+        
+        if(map.get(trader.getName()) != trader.getPassword()){
+          
+          return -2;
+        
+        }
+        
+        else if(map.get(trader.getName()) != trader.getName()){ 
+          
+          return -1;
+        
+        } else {
+          
+          return 0;
+          System.out.println("Welcome to SafeTrade!");
+        
+      }
+    
   }
   
   //===============================================================================================================================
@@ -60,6 +85,6 @@ public class Brokerage implements Login {
 
  public void logout(Trader trader){
    
-   
+   map.remove(trader.getName());
    
 }
