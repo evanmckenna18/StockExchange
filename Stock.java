@@ -8,7 +8,7 @@ public class Stock {
   public static java.text.DecimalFormat money = new DecimalFormat("$0,000,000,000.00");
   private String symbol,name;
   private double price, high, low, last;
-  private volume;
+  private int volume;
   private PriorityQueue<TradeOrder> buy;
   private PriorityQueue<TradeOrder> sell;
   
@@ -41,7 +41,7 @@ public class Stock {
     } else {
       str = str + "Buy ";
     }
-    str = str + this.stockSymbol +  "(" + this.companyName + ")\n";
+    str = str + this.symbol +  "(" + this.name + ")\n";
     
     str = str + order.getShares() + " shares";
     if (order.isMarket()) {
