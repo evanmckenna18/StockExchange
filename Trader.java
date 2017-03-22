@@ -64,7 +64,7 @@ public class Trader implements Comparable<Trader>{
   }
                
   public void quit(){
-    broker.logout(this)
+    broker.logout(this);
       window = null;
   }
                
