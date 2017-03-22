@@ -62,8 +62,8 @@ public class Stock {
   private void executeOrders(){
     while (!(this.buy.isEmpty()) || (!this.sell.isEmpty()))
     {
-      TradeOrder s = (TradeOrder)sellOrders.peek();
-      TradeOrder b = (TradeOrder)buyOrders.peek();
+      TradeOrder s = (TradeOrder)sell.peek();
+      TradeOrder b = (TradeOrder)buy.peek();
       if ((s.isLimit()) && (b.isLimit()) && (s.getPrice() > b.getPrice())) {
         break;
       }
