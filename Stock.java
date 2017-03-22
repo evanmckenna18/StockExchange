@@ -31,7 +31,7 @@ public class Stock {
   public String getQuote(){
     String str = name + " (" + symbol + ")\n" + "Price: " + money.format(last) + " High: " + high + " Low: " + low + " Ask: " + sell.peek() + " Size: "
       + sell.size() + " Bid: " + buy.peek() + " Size: " + buy.size();
-    
+    return str;    
   }
   
   public void placeOrder(TradeOrder order){
