@@ -19,6 +19,9 @@ public class TradeOrder {
   public Trader getTrader(){
     return trader;
   }
+    public double getPrice(){
+    return price;
+  }
   public String getSymbol(){
     return symbol;
   }
