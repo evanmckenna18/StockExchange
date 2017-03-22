@@ -40,6 +40,7 @@ public class Brokerage implements Login {
   //===============================================================================================================================
   
   public void getQuote(String symbol, Trader trader){
+ 
     
   }
  
@@ -77,6 +78,7 @@ public class Brokerage implements Login {
   //===============================================================================================================================
   
   public void placeOrder(TradeOrder order){
+    
     
   }
  
