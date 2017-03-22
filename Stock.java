@@ -86,7 +86,7 @@ public class Stock {
       s.subtractShares(shares);
       b.subtractShares(shares);
       
-      String str = shares + " of " + this.stockSymbol + " at " + money.format(price) + " for " + money.format(price * shares) + " in total";
+      String str = shares + " shares of " + this.stockSymbol + " at " + money.format(price) + " for " + money.format(price * shares) + " in total";
       
       b.getTrader().receiveMessage("You bought: " + str);
       s.getTrader().receiveMessage("You sold: " + str);
