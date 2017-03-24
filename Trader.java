@@ -2,20 +2,20 @@
  * Created by EvanMcKenna18 on 3/17/2017.
  */
 import java.util.LinkedList;
-import GeneralStuff.Brokerage;
+import java.util.Queue;
 
 public class Trader implements Comparable<Trader>{
   private String name;
   private String password;
   private Brokerage broker;
   private TraderWindow window;
-  private LinkedList<String> mailbox;
+  private Queue<String> mailbox;
 
   public Trader(Brokerage brokerage, String n, String pw){
     name = n;
     password = pw;
     broker = brokerage;
-    mailbox = new LinkedList<>();
+    mailbox = new LinkedList();
     window = new TraderWindow(this);
   }
                
@@ -56,11 +56,11 @@ public class Trader implements Comparable<Trader>{
               
   public void openWindow(){
     TraderWindow newWindow = new TraderWindow(this);
-    newWindow.showMessage(mailbox.remove())
+    newWindow.showMessage(mailbox.remove());
   }
                
   public void placeOrder(TradeOrder order){
-    this.placeOrder(order);
+    this.broker.placeOrder(order);
   }
                
   public void quit(){
