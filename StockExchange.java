@@ -1,13 +1,18 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by EvanMcKenna18 on 3/17/2017.
  */
+
+
 public class StockExchange {
   
-   Map<Stock, String> map;
+   Map<String, Stock> map;
   
   public StockExchange(){
     
-   map = new HashMap<String, Stock>();
+   map = new HashMap(1000);
     
   }
   
@@ -24,10 +29,10 @@ public class StockExchange {
         Stock stockRet = map.get(symbol);  //??
           
         ret = stockRet.getQuote();
-      }
-      
     }
-    
+      
+
+
        return ret;
        
   }
@@ -39,9 +44,9 @@ public class StockExchange {
     
     //create a HashMap and put newStock on it
     
-    Stock newStock = Stock(symbol, name, price);
+    Stock newStock = new Stock(symbol, name, price);
     
-    map.put(newStock, symbol);    
+    map.put(symbol, newStock);
     
     
   }
@@ -50,7 +55,7 @@ public class StockExchange {
   
   public void placeOrder(TradeOrder order){
     
-   String stockSymbol = order.getSymbol();
+    String stockSymbol = order.getSymbol();
     
     map.get(stockSymbol).placeOrder(order);
     
