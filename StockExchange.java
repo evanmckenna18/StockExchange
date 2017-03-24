@@ -5,6 +5,24 @@ import java.util.Map;
  * Created by EvanMcKenna18 on 3/17/2017.
  */
 
+/**
+ * HONOR PLEDGE: All work here is honestly obtained and is my own.  Signed: Rebecca Michaud
+ * @author Michaudr
+ * Date of Completion: 3/24/17
+ * Assignment: Stock Exchange Group Project - StockExchange
+ * 				Eclipse
+ * 
+ * Attribution: Include group members or helpers that assisted you in completing your work. (Required)
+ * Rebecca Michaud, Tanner Hess, Evan McKenna
+ *
+ * General Description:   Include purpose of the code, special uses of this code,  list of accomplished features.
+ *
+ * Works with the StockExchange class to list stocks, get quotes, and place orders.
+ *
+ **/
+
+
+ 
 
 public class StockExchange {
   
@@ -19,11 +37,14 @@ public class StockExchange {
   
   //======================================================================================================================================
   
+  /**
+   * Gets the quote from a stock within the map in the class 
+   * Returns the quote from the stock who's symbol is given
+   **/
+  
   public String getQuote(String symbol){
     
     String ret = "";
-    //finds the Stock with the symbol and produces a quote for it
-    //Format: Name(Symbol) Price: (price)  hi: (price)  lo: (price)  vol: 0
     
     if(map.containsKey(symbol) == true){
         Stock stockRet = map.get(symbol);  //??
@@ -40,6 +61,10 @@ public class StockExchange {
   
   //======================================================================================================================================
   
+  /**
+  * Adds a new stock to the map
+  **/
+  
   public void listStock(String symbol, String name, double price){
     
     //create a HashMap and put newStock on it
@@ -52,6 +77,10 @@ public class StockExchange {
   }
   
   //======================================================================================================================================
+  
+  /**
+  * places a stock order in the stock from the symbol given in the TradeOrder
+  **/
   
   public void placeOrder(TradeOrder order){
     
