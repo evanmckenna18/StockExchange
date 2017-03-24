@@ -1,6 +1,14 @@
 /**
- * Created by EvanMcKenna18 on 3/17/2017.
+ * HONOR PLEDGE: All work here is honestly obtained and is my own.  Signed: Tanner Hess
+ * @author Hesst
+ * Date of Completion: 3/24/17
+ * Assignment: Stock Exchange Group Project - priceComparator
+ * Attribution: Include group members or helpers that assisted you in completing your work. (Required)
+ * Rebecca Michaud, Tanner Hess, Evan McKenna
+ * General Description: price comparator methods and fields
+ * a class that compares different trade orders
  */
+
 java.util.Comparator<TradeOrder>;
 
 public class PriceComparator implements Comparator<TradeOrder>{
