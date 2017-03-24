@@ -1,82 +1,77 @@
-/**
- * Created by EvanMcKenna18 on 3/17/2017.
- */
 import java.util.LinkedList;
-import java.util.Queue;
 
-public class Trader implements Comparable<Trader>{
-  private String name;
+public class Trader implements Comparable<Trader>
+{
+  private Brokerage brokerage;
+  private String username;
   private String password;
-  private Brokerage broker;
   private TraderWindow window;
-  private Queue<String> mailbox;
+  private LinkedList<String> mailbox;
 
-  public Trader(Brokerage brokerage, String n, String pw){
-    name = n;
-    password = pw;
-    broker = brokerage;
-    mailbox = new LinkedList();
-    window = new TraderWindow(this);
+  public Trader(Brokerage brokerage, String name, String password)
+  {
+    this.brokerage = brokerage;
+    this.username = name;
+    this.password = password;
+    this.mailbox = new LinkedList();
   }
-               
-  @Override
-  public int compareTo(Trader other) {
-    int diff = this.getName().compareToIgnoreCase(other.getName());
-    if(diff != 0){
-      return diff;
-    }
-    else{
-      return 0;
-    }
+
+  public String getName()
+  {
+    return username;
   }
-               
-  public boolean equals(Object other){
-    if(other!=null){
-      return name.equals(((Trader)other).getName()); 
-    }
-    else
-      return false;
-  }
-               
-  public String getName(){
-    return name;
-  }
-               
-  public String getPassword(){
+
+  public String getPassword()
+  {
     return password;
   }
-             
-  public void getQuote(String symbol){
-    broker.getQuote(symbol,this);
+
+  public int compareTo(Trader other)
+  {
+    return username.compareToIgnoreCase(other.getName());
   }
-               
-  public boolean hasMessages(){
-    return !mailbox.isEmpty();
+
+  public boolean equals(Object other)
+  {
+    return username.equalsIgnoreCase(((Trader)other).getName());
   }
-              
-  public void openWindow(){
-    TraderWindow newWindow = new TraderWindow(this);
-    newWindow.showMessage(mailbox.remove());
+
+  public void openWindow()
+  {
+    window = new TraderWindow(this);
+    while (!this.mailbox.isEmpty()) {
+      window.showMessage(mailbox.remove());
+    }
   }
-               
-  public void placeOrder(TradeOrder order){
-    this.broker.placeOrder(order);
+
+  public boolean hasMessages()
+  {
+    return !this.mailbox.isEmpty();
   }
-               
-  public void quit(){
-    broker.logout(this);
-      window = null;
-  }
-               
-  public void receiveMessage(String msg){
-    mailbox.add(msg);
-                              
+
+  public void receiveMessage(String msg)
+  {
+    this.mailbox.add(msg);
     if (window != null) {
-      while (!mailbox.isEmpty()) {
+      while (!this.mailbox.isEmpty()) {
         window.showMessage(mailbox.remove());
       }
     }
   }
-               
 
+  public void getQuote(String symbol)
+  {
+    brokerage.getQuote(symbol, this);
+  }
+
+  public void placeOrder(TradeOrder order)
+  {
+    brokerage.placeOrder(order);
+  }
+
+  public void quit()
+  {
+    window = null;
+    brokerage.logout(this);
+  }
 }
