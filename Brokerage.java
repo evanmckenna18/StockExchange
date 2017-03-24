@@ -1,96 +1,74 @@
-/**
- * Created by EvanMcKenna18 on 3/17/2017.
- */
-public class Brokerage implements Login {
-  
-  Map<String, String> map = new TreeMap<String, String>();
-  StockExchange ex;
-  
-  public Brokerage(StockExchange exchange){
-    
-    ex = exchange;
-    
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+public class Brokerage
+        implements Login
+{
+  private Map<String, Trader> traders;
+  private Set<Trader> loggedTraders;
+  private StockExchange exchange;
+
+  public Brokerage(StockExchange exchange)
+  {
+    this.traders = new TreeMap();
+    this.loggedTraders = new TreeSet();
+    this.exchange = exchange;
   }
-  
-  
-  //===============================================================================================================================
-  
-  public int addUser(String name, String password){
-        
-    if(map.containsKey(name) == true){
-      
-      return -3;
-      
-    } else if(name.length() < 4 || name.length() > 10){
-      
+
+  public int addUser(String name, String password)
+  {
+    int len = name.length();
+    if ((len < 4) || (len > 10)) {
       return -1;
-      
-    } else if(password.length() < 2 || password.length() > 10){
-      
+    }
+    len = password.length();
+    if ((len < 2) || (len > 10)) {
       return -2;
-      
-    } else {
-      
-      map.put(name, password);
-      return 0;
-      
     }
-    
-  }
-  
-  //===============================================================================================================================
-  
-  public void getQuote(String symbol, Trader trader){
-     
-    trader.recieveMessage(ex.getQuote(symbol));
- 
-    
-  }
- 
-  //===============================================================================================================================
-  
-  public int login(Trader trader){
-    
-    if(map.containsKey(trader.getName()) == true){
-      
+    if (this.traders.containsKey(name)) {
       return -3;
-      
     }
-      
-      if(map.containsKey(trader.getName()) == false){
-        
-        if(map.get(trader.getName()) != trader.getPassword()){
-          
-          return -2;
-        
-        }
-        
-        else if(map.get(trader.getName()) != trader.getName()){ 
-          
-          return -1;
-        
-        } else {
-          
-          return 0;
-          System.out.println("Welcome to SafeTrade!");
-        
-      }
-    
+    Trader trader = new Trader(this, name, password);
+    this.traders.put(name, trader);
+    return 0;
   }
-  
-  //===============================================================================================================================
-  
-  public void placeOrder(TradeOrder order){
-       
-    ex.placeOrder(order);
-    
+
+  public int login(String name, String password)
+  {
+    Trader trader = (Trader)this.traders.get(name);
+    if (trader == null) {
+      return -1;
+    }
+    String storedPassword = trader.getPassword();
+    if (!storedPassword.equals(password)) {
+      return -2;
+    }
+    if (this.loggedTraders.contains(trader)) {
+      return -3;
+    }
+    if (!trader.hasMessages()) {
+      trader.receiveMessage("Welcome to SafeTrade!");
+    }
+    trader.openWindow();
+
+    this.loggedTraders.add(trader);
+    return 0;
   }
- 
 
-  //===============================================================================================================================
+  public void logout(Trader trader)
+  {
+    this.loggedTraders.remove(trader);
+  }
 
- public void logout(Trader trader){
-   
-   map.remove(trader.getName());
-   
+  public void getQuote(String symbol, Trader trader)
+  {
+    trader.receiveMessage(this.exchange.getQuote(symbol));
+  }
+
+  public void placeOrder(TradeOrder order)
+  {
+    this.exchange.placeOrder(order);
+  }
 }
