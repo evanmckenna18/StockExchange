@@ -1,6 +1,6 @@
 /**
  * HONOR PLEDGE: All work here is honestly obtained and is my own.  Signed: Tanner Hess
- * @author Tannerh
+ * @author Hesst
  * Date of Completion: 3/24/17
  * Assignment: Stock Exchange Group Project - Trader
  * Attribution: Include group members or helpers that assisted you in completing your work. (Required)
